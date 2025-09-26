@@ -1,0 +1,309 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  /* ===== Colors ===== */
+  --primary-color: #0E4BF1;
+  --panel-color: #ffffffcc;
+  --text-color: #222;
+  --black-light-color: #707070;
+  --border-color: #e6e5e5;
+  --toggle-color: #DDD;
+
+  --box1-color: linear-gradient(135deg, #4DA3FF, #1E77E9);
+  --box2-color: linear-gradient(135deg, #FFD580, #FFAC33);
+  --box3-color: linear-gradient(135deg, #C3A6FF, #7A4EDB);
+
+  --title-icon-color: #fff;
+
+  /* ====== Transition ====== */
+  --tran-05: all 0.5s ease;
+  --tran-03: all 0.3s ease;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff, #cacaca);
+  color: var(--text-color);
+}
+
+/* ===== Dark Mode ===== */
+body.dark {
+  --primary-color: #1d1f21;
+  --panel-color: #242526dd;
+  --text-color: #f5f5f5;
+  --black-light-color: #ccc;
+  --border-color: #444;
+  --toggle-color: #666;
+
+  --box1-color: linear-gradient(135deg, #333, #444);
+  --box2-color: linear-gradient(135deg, #444, #555);
+  --box3-color: linear-gradient(135deg, #555, #666);
+  --title-icon-color: #f5f5f5;
+
+  background: linear-gradient(135deg, #141414, #1f1f1f);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0932a8;
+}
+
+/* ===== Sidebar ===== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  padding: 15px 18px;
+  background: var(--panel-color);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  transition: var(--tran-05);
+}
+
+
+nav .logo-name {
+  display: flex;
+  align-items: center;
+}
+nav .logo-name .logo_name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-left: 14px;
+  color: var(--text-color);
+  transition: var(--tran-05);
+}
+nav.close .logo_name {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.menu-items {
+  margin-top: 40px;
+  height: calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-items li {
+  list-style: none;
+}
+.menu-items li a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 0 10px;
+  transition: var(--tran-03);
+}
+.menu-items li a i {
+  font-size: 22px;
+  min-width: 45px;
+  text-align: center;
+  color: var(--black-light-color);
+}
+.menu-items li a .link-name {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  color: var(--black-light-color);
+}
+.menu-items li a:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+.menu-items li a:hover i,
+.menu-items li a:hover .link-name {
+  color: #fff;
+}
+
+.logout-mode {
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+}
+.mode {
+  display: flex;
+  align-items: center;
+}
+.mode-toggle {
+  margin-left: auto;
+  cursor: pointer;
+}
+.mode-toggle .switch {
+  height: 22px;
+  width: 40px;
+  border-radius: 25px;
+  background: var(--toggle-color);
+  position: relative;
+}
+.switch:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background: var(--panel-color);
+  transition: var(--tran-03);
+}
+body.dark .switch:before {
+  left: 20px;
+}
+
+/* ===== Dashboard ===== */
+.dashboard {
+  position: relative;
+  left: 250px;
+  background: var(--panel-color);
+  backdrop-filter: blur(15px);
+  min-height: 100vh;
+  width: calc(100% - 250px);
+  padding: 20px;
+  transition: var(--tran-05);
+}
+nav.close ~ .dashboard {
+  left: 73px;
+  width: calc(100% - 73px);
+}
+
+
+/* ===== Boxes ===== */
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.box {
+  flex: 1;
+  min-width: 220px;
+  padding: 20px;
+  border-radius: 16px;
+  color: #fff;
+  background: var(--box1-color);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+.box i {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+.box .text {
+  font-size: 16px;
+  font-weight: 500;
+}
+.box .number {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+.box2 {
+  background: var(--box2-color);
+}
+.box3 {
+  background: var(--box3-color);
+}
+
+/* ===== Table ===== */
+.table-wrapper {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel-color);
+  text-align: center;
+}
+
+table th, table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+table th {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(0,0,0,0.03);
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  display: inline-block;
+  min-width: 90px;
+}
+
+.status.feito {
+  background-color: #28a745;
+  color: #fff;
+}
+.status.nao-feito {
+  background-color: #dc3545;
+  color: #fff;
+}
+.status.atrasado {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 1000px) {
+  nav { width: 73px; }
+  nav.close { width: 250px; }
+  nav .logo_name { opacity: 0; }
+  nav.close .logo_name { opacity: 1; }
+  .dashboard { left: 73px; width: calc(100% - 73px); }
+  nav.close ~ .dashboard { left: 250px; width: calc(100% - 250px); }
+}
+@media (max-width: 780px) {
+  .boxes { flex-direction: column; }
+}
+@media (max-width: 560px) {
+  .top { flex-direction: column; gap: 10px; }
+  .search-box { max-width: 100%; }
+}
+
+.title {
+  margin-top: 30px;
+}

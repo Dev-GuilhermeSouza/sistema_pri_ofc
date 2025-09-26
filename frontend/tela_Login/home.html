@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/home.css">
+
+  <!-- Icones -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+  <title>Painel do Aluno</title>
+</head>
+<body>
+  <nav>
+    <div class="logo-name">
+      <span class="logo_name">Área do Aluno</span>
+    </div>
+
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li>
+          <a href="#">
+            <i class="uil uil-estate"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="perguntas.html">
+            <i class="uil uil-question-circle"></i>
+            <span class="link-name">Materia</span>
+          </a>
+        </li>
+      </ul>
+      
+      <ul class="logout-mode">
+        <li>
+          <a href="login.html">
+            <i class="uil uil-signout"></i>
+            <span class="link-name">Sair</span>
+          </a>
+        </li>
+        <li class="mode">
+          <a href="#">
+            <i class="uil uil-moon"></i>
+            <span class="link-name">Modo Escuro</span>
+          </a>
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="dashboard">
+    <div class="top">
+      <i class="uil uil-bars sidebar-toggle"></i>
+
+      <div class="search-box">
+        <i class="uil uil-search"></i>
+        <input type="text" placeholder="Pesquisar...">
+      </div>
+      
+      <div class="profile">
+        <span class="profile-name">Aluno</span>
+      </div>
+    </div>
+
+    <div class="dash-content">
+      <!-- Cards Resumo -->
+      <div class="overview">
+        <div class="title">
+          <i class="uil uil-tachometer-fast-alt"></i>
+          <span class="text">Resumo</span>
+        </div>
+
+        <div class="boxes">
+          <div class="box box1">
+            <i class="uil uil-check-circle"></i>
+            <span class="text">Perguntas Respondidas</span>
+            <span class="number" id="total-respondidas">0</span>
+          </div>
+          <div class="box box2">
+            <i class="uil uil-times-circle"></i>
+            <span class="text">Perguntas Pendentes</span>
+            <span class="number" id="total-pendentes">0</span>
+          </div>
+          <div class="box box3">
+            <i class="uil uil-list-ul"></i>
+            <span class="text">Total de Perguntas</span>
+            <span class="number" id="total-perguntas">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atividade -->
+      <section class="activity">
+        <div class="title">
+          <i class="uil uil-clock-three"></i>
+          <span class="text">Atividades Recentes</span>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="tabela-atividades">
+            <thead>
+              <tr>
+                <th>Atividade</th>
+                <th>Materia</th>
+                <th>Data de Entrega</th>
+                <th>Status</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" style="text-align:center;">Carregando...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

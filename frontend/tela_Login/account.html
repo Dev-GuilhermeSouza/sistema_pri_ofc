@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta</title>
+
+  <!--CSS-->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/media.css">
+
+  <!--JS & jQuery-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="banner">
+      <img src="assets/img/login.png" alt="Imagem de login">
+      <p style="color: #fff;">
+        Seja bem-vindo! Acesse e aproveite todo o conteúdo.<br>
+        Somos uma equipe de profissionais empenhados em<br>
+        trazer o melhor conteúdo direcionado a você.
+      </p>
+    </div>
+
+    <div class="box-login">
+      <h1>Junte-se a nós,<br>Crie sua conta hoje!</h1>
+
+      <div class="box-account">
+        <h2>Informe seus dados</h2>
+        <form id="formCadastro" onsubmit="return false">
+          <input type="text" name="username" id="username" placeholder="RA (somente números)" inputmode="numeric">
+          <input type="date" name="data" id="data">
+          <input type="email" name="email" id="email" placeholder="E-mail">
+          <input type="email" name="cmail" id="cmail" placeholder="Confirmar e-mail">
+          <input type="password" name="password" id="password" placeholder="Senha">
+          <input type="password" name="cpassword" id="cpassword" placeholder="Confirmar senha">
+
+          <div class="check">
+            <input type="checkbox" name="termo" id="termo" style="width: 14px; height: 14px;">
+            <label for="termo" style="color: #3d3d3d;">Li e aceito os termos</label>
+          </div>
+
+          <button type="button" id="btnCriarConta">Criar conta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <a href="login.html">
+    <div id="bubble">
+      <img src="assets/img/user.png" alt="Ícone de usuário" title="Fazer login">
+    </div>
+  </a>
+
+  <script type="text/javascript" src="assets/js/script.js"></script>
+</body>
+</html>

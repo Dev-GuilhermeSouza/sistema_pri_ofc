@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do Aluno - Perguntas</title>
+
+  <link rel="stylesheet" href="assets/css/home.css" />
+  <link rel="stylesheet" href="assets/css/perguntas.css" />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <style>
+    /* #tela-carregamento {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 1.5em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    } */
+    .question { margin-bottom: 15px; }
+    .question input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo-name">
+      <span class="logo_name">Área do Aluno</span>
+    </div>
+
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li>
+          <a href="home.html">
+            <i class="uil uil-estate"></i>
+            <span class="link-name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="perguntas.html">
+            <i class="uil uil-question-circle"></i>
+            <span class="link-name">Materia</span>
+          </a>
+        </li>
+      </ul>
+      
+      <ul class="logout-mode">
+        <li>
+          <a href="login.html">
+            <i class="uil uil-signout"></i>
+            <span class="link-name">Sair</span>
+          </a>
+        </li>
+        <li class="mode">
+          <a href="#">
+            <i class="uil uil-moon"></i>
+            <span class="link-name">Modo Escuro</span>
+          </a>
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="dashboard perguntas-section">
+    <div id="tela-materias">
+      <h1>Matérias</h1>
+      <ul id="lista-materias" class="lista-perguntas"></ul>
+    </div>
+
+    <div id="tela-introducao" style="display:none;">
+      <h2 id="titulo-introducao"></h2>
+      <p id="texto-introducao"></p>
+      <button id="btn-avancar">Avançar</button>
+    </div>
+
+    <div id="tela-perguntas" style="display:none;">
+      <h2>Perguntas da Matéria</h2>
+      <div id="container-perguntas"></div>
+      <button id="btn-concluir">Concluir</button>
+    </div>
+
+    <div id="tela-final" style="display:none;">
+      <h2>🎉 Parabéns!</h2>
+      <p>Você concluiu a matéria com sucesso.</p>
+      <button onclick="window.location.reload()">Voltar para início</button>
+    </div>
+  </section>
+
+  <script src="assets/js/perguntas-teste.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

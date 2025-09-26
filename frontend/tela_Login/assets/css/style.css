@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background: url('../img/fundo.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+/* Container principal */
+#container {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    max-width: 95%;
+    min-height: 520px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Banner lateral */
+.banner {
+    flex: 1;
+    background: linear-gradient(135deg, #785eef, #5a3edc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+}
+
+.banner img {
+    max-width: 220px;
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+/* Box de login / criar conta / recuperar senha */
+.box-login {
+    flex: 1;
+    background: #fff;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-login h1 {
+    color: #5a3edc;
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.box-login h2 {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Inputs */
+.box-login input {
+    width: 100%;
+    max-width: 320px;
+    height: 40px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    transition: 0.3s ease;
+    background: #f9f9f9;
+}
+
+.box-login input:focus {
+    border-color: #5a3edc;
+    box-shadow: 0 0 6px rgba(90, 62, 220, 0.4);
+    background: #fff;
+}
+
+/* Botões */
+button {
+    width: 100%;
+    max-width: 320px;
+    height: 40px;
+    margin-top: 15px;
+    background: #5a3edc;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #4a2fc9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Links */
+a p {
+    color: #5a3edc;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+    text-align: center;
+}
+
+a p:hover {
+    color: #4a2fc9;
+}
+
+/* Texto explicativo */
+.box-login p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Checkbox termos */
+.check {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 6px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.check input {
+    width: 16px;
+    height: 16px;
+}
+
+/* Bolha para voltar */
+#bubble {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background: #5a3edc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#bubble:hover {
+    background: #4a2fc9;
+    transform: scale(1.05);
+}
+
+#bubble img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    .box-login {
+        width: 100%;
+        padding: 20px;
+    }
+
+    button,
+    .box-login input {
+        max-width: 100%;
+    }
+}

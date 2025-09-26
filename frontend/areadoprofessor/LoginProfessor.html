@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Professor</title>
+  <link rel="stylesheet" href="assets/css/login.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <i class="uil uil-user-circle login-icon"></i>
+      <h2>Área do Professor</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <i class="uil uil-envelope-alt"></i>
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="input-group">
+          <i class="uil uil-lock-alt"></i>
+          <input type="password" id="senha" placeholder="Senha" required>
+        </div>
+        <button type="submit">Entrar</button>
+      </form>
+      <p id="loginError" class="error-msg"></p>
+    </div>
+  </div>
+
+  <script src="assets/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Área do Professor</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/professor.css">
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo-name">
+      <span class="logo_name">Área do Professor</span>
+    </div>
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li data-target="overview" class="active">
+          <a href="#"><i class="uil uil-estate"></i><span class="link-name">Dashboard</span></a>
+        </li>
+        <li data-target="activity">
+          <a href="#"><i class="uil uil-users-alt"></i><span class="link-name">Alunos</span></a>
+        </li>
+        <li data-target="contents">
+          <a href="#"><i class="uil uil-book-open"></i><span class="link-name">Conteúdos</span></a>
+        </li>
+      </ul>
+
+      <ul class="logout-mode">
+        <li>
+          <a href="#"><i class="uil uil-signout"></i><span class="link-name">Logout</span></a>
+        </li>
+        <li class="mode">
+          <a href="#" aria-label="Alternar tema escuro">
+            <i class="uil uil-moon"></i><span class="link-name">Dark Mode</span>
+          </a>
+          <div class="mode-toggle" role="switch" aria-checked="false">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Container principal -->
+  <div class="dash-content">
+    <div class="menu"><i class="uil uil-bars sidebar-toggle"></i></div>
+
+    <!-- Dashboard -->
+    <div class="overview flex-section" id="overview">
+      <div class="title"><i class="uil uil-tachometer-fast-alt"></i><span class="text">Dashboard</span></div>
+      <div class="boxes">
+        <div class="box box1"><i class="uil uil-thumbs-up"></i><span class="text">Perguntas Respondidas</span><span class="number">50</span></div>
+        <div class="box box2"><i class="uil uil-comments"></i><span class="text">Perguntas Faltantes</span><span class="number">20</span></div>
+        <div class="box box3"><i class="uil uil-share"></i><span class="text">Total de Perguntas</span><span class="number">70</span></div>
+        <div class="box box4"><i class="uil uil-users-alt"></i><span class="text">Total de Alunos</span><span class="number">35</span></div>
+      </div>
+    </div>
+
+    <!-- Alunos -->
+    <div class="alunos-activity flex-section" id="activity">
+      <div class="alunos-title"><i class="uil uil-users-alt"></i><span class="alunos-text">Alunos</span></div>
+      <div class="alunos-table">
+        <div class="alunos-header">
+          <span>Nome</span>
+          <span>Email</span>
+        </div>
+        <div class="alunos-row">
+          <span>João Silva</span>
+          <span>joao@email.com</span>
+        </div>
+        <div class="alunos-row">
+          <span>Maria Souza</span>
+          <span>maria@email.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conteúdos -->
+    <div class="contents flex-section" id="contents">
+      <div class="title"><i class="uil uil-book-open"></i><span class="text">Conteúdos</span></div>
+
+      <div class="contents-actions">
+        <button id="importarConteudo" class="btn-import"><i class="uil uil-import"></i> Criar Conteúdo</button>
+      </div>
+
+      <div class="questions">
+        <div class="section-title"><i class="fas fa-question-circle"></i>Perguntas do Professor</div>
+
+        <div class="professor-table-header">
+          <span class="col-question">Perguntas</span>
+          <span class="col-discipline">Disciplina</span>
+          <span class="col-date">Data</span>
+          <span class="col-actions">Ações</span>
+        </div>
+
+        <div id="professorConteudoTabela">
+          <!-- Conteúdos serão renderizados pelo JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal do professor -->
+  <!-- Modal do professor -->
+<div id="modalPergunta" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="modalTitle">Criar Conteúdo</h2>
+
+    <!-- Campo de matéria -->
+<div class="input-group">
+  <label for="inputMateria">Matéria</label>
+  <select id="inputMateria">
+    <option value="Cosmovisão">Cosmovisão</option>
+    <option value="Ética e Cidadania">Ética e Cidadania</option>
+    <option value="CTS">CTS</option>
+  </select>
+</div>
+
+    <!-- Campo de data -->
+  <div class="input-group">
+  <label for="inputData">Data de Criação</label>
+  <input type="date" id="inputData" readonly>
+</div>
+
+    <!-- Introdução -->
+    <div class="input-group">
+      <label>Introdução</label>
+      <textarea id="inputIntroducao" placeholder="Digite a introdução da matéria..."></textarea>
+    </div>
+
+    <!-- Perguntas -->
+    <div id="perguntasContainer">
+      <div class="input-group pergunta-item">
+        <label>Pergunta 1</label>
+        <input type="text" class="inputPergunta" placeholder="Digite a pergunta...">
+      </div>
+    </div>
+
+    <button type="button" id="btnAdicionarPergunta" class="btn">Adicionar Pergunta</button>
+    <button type="button" id="salvarPergunta" class="btn">Salvar Conteúdo</button>
+  </div>
+</div>
+
+
+  <script src="assets/js/professor.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>
