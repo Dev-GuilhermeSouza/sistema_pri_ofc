@@ -113,35 +113,79 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(overlay);
     }
 
-    /* ====== Função de Validação Geral ====== */
-    function validarCampos() {
-        let campos = document.querySelectorAll("input");
-        let tudoOk = true;
+    /* ====== Funções de Validação por Tela ====== */
+    function validarLogin() {
+        let ra = document.getElementById("username");
+        let senha = document.getElementById("password");
+
+        if (!ra || !senha) return false;
+
+        if (!ra.value.trim() || !senha.value.trim()) {
+            showMessage("RA e senha são obrigatórios!");
+            return false;
+        }
+        if (senha.value.length < 6) {
+            showMessage("A senha precisa ter pelo menos 6 caracteres!");
+            return false;
+        }
+        return true;
+    }
+
+    function validarRecuperacao() {
+        let ra = document.getElementById("username");
+        let email = document.getElementById("email");
+        let cemail = document.getElementById("cmail");
+
+        if (!ra || !email || !cemail) return false;
+
+        if (!ra.value.trim() || !email.value.trim() || !cemail.value.trim()) {
+            showMessage("Preencha todos os campos!");
+            return false;
+        }
+        if (email.value !== cemail.value) {
+            showMessage("Os e-mails não coincidem!");
+            return false;
+        }
+        let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!regex.test(email.value)) {
+            showMessage("Digite um e-mail válido!");
+            return false;
+        }
+        return true;
+    }
+
+    function validarCadastro() {
+        let ra = document.getElementById("username");
+        let data = document.getElementById("data");
         let email = document.getElementById("email");
         let cemail = document.getElementById("cmail");
         let senha = document.getElementById("password");
         let csenha = document.getElementById("cpassword");
+        let termo = document.getElementById("termo");
 
-        campos.forEach(campo => {
-            if (campo.hasAttribute("required") && campo.value.trim() === "") {
-                tudoOk = false;
-                campo.style.border = "2px solid #e74c3c";
-            } else {
-                campo.style.border = "1px solid #ccc";
-            }
-        });
+        if (!ra || !data || !email || !cemail || !senha || !csenha || !termo) return false;
 
-        if (email && cemail && email.value !== cemail.value) {
+        if (!ra.value.trim() || !data.value.trim() || !email.value.trim() || !cemail.value.trim() || !senha.value.trim() || !csenha.value.trim()) {
+            showMessage("Todos os campos são obrigatórios!");
+            return false;
+        }
+        if (email.value !== cemail.value) {
             showMessage("Os e-mails não coincidem!");
-            tudoOk = false;
+            return false;
         }
-
-        if (senha && csenha && senha.value !== csenha.value) {
+        if (senha.value.length < 6) {
+            showMessage("A senha precisa ter pelo menos 6 caracteres!");
+            return false;
+        }
+        if (senha.value !== csenha.value) {
             showMessage("As senhas não coincidem!");
-            tudoOk = false;
+            return false;
         }
-
-        return tudoOk;
+        if (!termo.checked) {
+            showMessage("Você precisa aceitar os termos!");
+            return false;
+        }
+        return true;
     }
 
     /* ====== Botões com verificação ====== */
@@ -150,26 +194,20 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
 
             if (btn.innerText.includes("Login")) {
-                if (validarCampos()) {
+                if (validarLogin()) {
                     showModal("Login realizado com sucesso!", "home.html");
-                } else {
-                    showMessage("Preencha todos os campos corretamente!");
                 }
             }
 
             if (btn.innerText.includes("Criar conta")) {
-                if (validarCampos()) {
+                if (validarCadastro()) {
                     showModal("Conta criada com sucesso!", "login.html");
-                } else {
-                    showMessage("Preencha todos os campos corretamente!");
                 }
             }
 
             if (btn.innerText.includes("Obter código")) {
-                if (validarCampos()) {
+                if (validarRecuperacao()) {
                     showModal("Código enviado para o seu e-mail!", "password.html");
-                } else {
-                    showMessage("Preencha todos os campos corretamente!");
                 }
             }
         });

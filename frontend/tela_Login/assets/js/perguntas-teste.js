@@ -1,104 +1,135 @@
-// Seletores das telas
-const telaMaterias = document.getElementById("tela-materias");
-const telaIntroducao = document.getElementById("tela-introducao");
-const telaPerguntas = document.getElementById("tela-perguntas");
-const telaFinal = document.getElementById("tela-final");
+document.addEventListener("DOMContentLoaded", () => {
+  const listaMaterias = document.getElementById("lista-materias");
+  const telaMaterias = document.getElementById("tela-materias");
+  const telaIntroducao = document.getElementById("tela-introducao");
+  const telaPerguntas = document.getElementById("tela-perguntas");
+  const telaFinal = document.getElementById("tela-final");
 
-const tituloIntroducao = document.getElementById("titulo-introducao");
-const textoIntroducao = document.getElementById("texto-introducao");
-const listaMaterias = document.getElementById("lista-materias");
-const containerPerguntas = document.getElementById("container-perguntas");
+  const tituloIntroducao = document.getElementById("titulo-introducao");
+  const textoIntroducao = document.getElementById("texto-introducao");
+  const containerPerguntas = document.getElementById("container-perguntas");
 
-const btnAvancar = document.getElementById("btn-avancar");
-const btnConcluir = document.getElementById("btn-concluir");
+  const btnAvancar = document.getElementById("btn-avancar");
+  const btnConcluir = document.getElementById("btn-concluir");
 
-let materiaSelecionada = null;
-let perguntasAtuais = [];
+  const conteudos = JSON.parse(localStorage.getItem("conteudosProfessor") || "[]");
+  let materiaAtual = null;
+  let respostas = JSON.parse(localStorage.getItem("respostasAluno") || "{}");
 
-// Função para alternar telas
-function mostrarTela(id) {
-  [telaMaterias, telaIntroducao, telaPerguntas, telaFinal].forEach(tela => {
-    tela.style.display = (tela.id === id) ? "block" : "none";
-  });
-}
+  // Função para salvar respostas no localStorage (para o próprio aluno revisar)
+  function salvarRespostas() {
+    localStorage.setItem("respostasAluno", JSON.stringify(respostas));
+  }
 
-// 1. Carregar matérias do backend
-async function carregarMaterias() {
-  try {
-    const res = await fetch("http://localhost:3000/api/materias");
-    const materias = await res.json();
+  // Listar matérias na tela inicial
+  function listarMaterias() {
+    if (conteudos.length === 0) {
+      listaMaterias.innerHTML = "<li>Nenhuma matéria cadastrada</li>";
+      return;
+    }
 
     listaMaterias.innerHTML = "";
-    materias.forEach(m => {
+    conteudos.forEach((c, index) => {
       const li = document.createElement("li");
-      li.textContent = m.nome;
-      li.classList.add("materia-item");
+      li.textContent = c.materia;
       li.style.cursor = "pointer";
-
-      li.addEventListener("click", () => {
-        materiaSelecionada = m.nome;
-        tituloIntroducao.textContent = `Matéria: ${m.nome}`;
-        textoIntroducao.textContent = m.descricao || "Introdução da matéria.";
-        mostrarTela("tela-introducao");
-      });
-
+      li.addEventListener("click", () => abrirIntroducao(index));
       listaMaterias.appendChild(li);
     });
-  } catch (err) {
-    console.error("Erro ao carregar matérias:", err);
   }
-}
 
-// 2. Carregar perguntas da matéria selecionada
-async function carregarPerguntas(materia) {
-  try {
-    const res = await fetch(`http://localhost:3000/api/perguntas/${materia}`);
-    perguntasAtuais = await res.json();
+  // Abrir introdução da matéria
+  function abrirIntroducao(index) {
+    materiaAtual = conteudos[index];
+    telaMaterias.style.display = "none";
+    telaIntroducao.style.display = "block";
+
+    tituloIntroducao.textContent = materiaAtual.materia;
+    textoIntroducao.textContent = materiaAtual.introducao;
+  }
+
+  // Avançar para perguntas
+  btnAvancar.addEventListener("click", () => {
+    telaIntroducao.style.display = "none";
+    telaPerguntas.style.display = "block";
 
     containerPerguntas.innerHTML = "";
-    perguntasAtuais.forEach(p => {
+    materiaAtual.perguntas.forEach((p, i) => {
       const div = document.createElement("div");
       div.classList.add("question");
+      const respostaSalva = respostas[materiaAtual.id]?.[i] || "";
       div.innerHTML = `
-        <label>${p.enunciado}</label>
-        <input type="text" name="resposta-${p.id}" />
+        <label>Pergunta ${i + 1}: ${p}</label>
+        <input type="text" data-index="${i}" value="${respostaSalva}" placeholder="Sua resposta">
+        <small class="error-msg" style="color:red; display:none;">⚠ Campo obrigatório</small>
       `;
       containerPerguntas.appendChild(div);
     });
-  } catch (err) {
-    console.error("Erro ao carregar perguntas:", err);
-  }
-}
 
-// 3. Avançar da introdução para perguntas
-btnAvancar.addEventListener("click", () => {
-  if (!materiaSelecionada) return;
-  carregarPerguntas(materiaSelecionada);
-  mostrarTela("tela-perguntas");
-});
-
-// 4. Concluir e enviar respostas
-btnConcluir.addEventListener("click", async () => {
-  const respostas = [];
-  perguntasAtuais.forEach(p => {
-    const input = document.querySelector(`input[name="resposta-${p.id}"]`);
-    respostas.push({ pergunta_id: p.id, resposta: input.value });
+    // Validação dinâmica enquanto digita
+    containerPerguntas.querySelectorAll("input").forEach(input => {
+      input.addEventListener("input", () => {
+        const msg = input.parentElement.querySelector(".error-msg");
+        if (input.value.trim() === "") {
+          msg.style.display = "block";
+          input.style.borderColor = "red";
+          input.style.backgroundColor = "#ffe5e5";
+        } else {
+          msg.style.display = "none";
+          input.style.borderColor = "green";
+          input.style.backgroundColor = "#e6ffe6";
+        }
+      });
+    });
   });
 
-  console.log("Respostas do aluno:", respostas);
+  // Concluir atividade
+  btnConcluir.addEventListener("click", () => {
+    const inputs = containerPerguntas.querySelectorAll("input");
+    let valido = true;
 
-  // Aqui você pode salvar no backend (exemplo):
-  /*
-  await fetch("http://localhost:3000/api/respostas", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ materia: materiaSelecionada, respostas })
+    inputs.forEach(input => {
+      const msg = input.parentElement.querySelector(".error-msg");
+      if (input.value.trim() === "") {
+        msg.style.display = "block";
+        input.style.borderColor = "red";
+        input.style.backgroundColor = "#ffe5e5";
+        valido = false;
+      }
+    });
+
+    if (!valido) return; // Se tiver erro, não prossegue
+
+    // Se tudo ok, salva as respostas do aluno (para ele mesmo)
+    const respostasAluno = Array.from(inputs).map(i => i.value.trim());
+    respostas[materiaAtual.id] = respostasAluno;
+    salvarRespostas();
+
+    // 🔹 Também salva no "respostasAlunos" (para o professor ver na aba Correção)
+    let respostasAlunos = JSON.parse(localStorage.getItem("respostasAlunos") || "[]");
+
+    respostasAlunos.push({
+      idConteudo: materiaAtual.id,
+      aluno: localStorage.getItem("alunoLogado") || "Aluno Anônimo",
+      respostas: respostasAluno,
+      data: new Date().toISOString().split("T")[0]
+    });
+
+    localStorage.setItem("respostasAlunos", JSON.stringify(respostasAlunos));
+
+    // Troca de tela
+    telaPerguntas.style.display = "none";
+    telaFinal.style.display = "block";
   });
-  */
 
-  mostrarTela("tela-final");
+  // Botão para voltar ao início
+  const btnVoltar = document.createElement("button");
+  btnVoltar.textContent = "Voltar para lista";
+  btnVoltar.addEventListener("click", () => {
+    telaFinal.style.display = "none";
+    telaMaterias.style.display = "block";
+  });
+  telaFinal.appendChild(btnVoltar);
+
+  listarMaterias();
 });
-
-// Inicializar
-carregarMaterias();
-  

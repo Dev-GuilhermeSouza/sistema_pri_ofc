@@ -33,6 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1800);
   }
 
+  // ===== Função Correção =====
+  function adicionarPerguntaNaCorrecao(pergunta) {
+    const lista = document.getElementById("correcaoLista");
+    if (!lista) return;
+    if (lista.querySelector("p")) lista.innerHTML = ""; // remove mensagem inicial
+    const item = document.createElement("div");
+    item.classList.add("correcao-item");
+    item.innerHTML = `<span>${pergunta}</span> <i class="uil uil-check"></i>`;
+    lista.appendChild(item);
+  }
+
   // ===== Injeção CSS mínimo =====
   (function injectSafeCSS() {
     const css = `
@@ -56,6 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
       .btn-excluir { background:#ef4444; color:#fff; }
       .fade-row { opacity:0; transform: translateY(6px); transition: opacity .25s, transform .25s; }
       .fade-row.visible { opacity:1; transform:none; }
+      .correcao-item {
+        display:flex; justify-content:space-between; 
+        padding:10px; border-bottom:1px solid #eee;
+      }
     `;
     const tag = document.createElement("style");
     tag.textContent = css;
@@ -180,6 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       conteudos.push({ id: Date.now(), introducao, perguntas, materia, data });
       toast("Conteúdo criado");
+
+      // >>> AQUI mandamos as perguntas para Correção
+      perguntas.forEach(p => adicionarPerguntaNaCorrecao(p));
     }
 
     saveStore(conteudos);
@@ -235,3 +253,48 @@ document.addEventListener("DOMContentLoaded", () => {
   showSection("overview");
   menuItems[0]?.classList.add("active");
 });
+
+// ===== Correção: carregar respostas dos alunos =====
+const correcaoContainer = document.getElementById("correcaoContainer");
+
+function loadRespostas() {
+  return JSON.parse(localStorage.getItem("respostasAlunos") || "[]");
+}
+
+function renderRespostasAlunos() {
+  if (!correcaoContainer) return;
+
+  const respostas = loadRespostas();
+  correcaoContainer.innerHTML = "";
+
+  if (respostas.length === 0) {
+    correcaoContainer.innerHTML = `<div class="professor-table-row">Nenhuma atividade concluída pelos alunos.</div>`;
+    return;
+  }
+
+  respostas.forEach((r, i) => {
+    const conteudo = conteudos.find(c => c.id === r.idConteudo);
+    const row = document.createElement("div");
+    row.classList.add("professor-table-row", "fade-row");
+
+    row.innerHTML = `
+      <span class="col-question">
+        <b>Aluno:</b> ${r.aluno} <br>
+        <b>Conteúdo:</b> ${conteudo ? conteudo.introducao : "Desconhecido"} <br>
+        <b>Respostas:</b><br>
+        ${r.respostas.map((resp, idx) => `<i>P${idx + 1}:</i> ${resp}`).join("<br>")}
+      </span>
+      <span class="col-discipline">${conteudo?.materia || "-"}</span>
+      <span class="col-date">${r.data}</span>
+      <span class="col-actions">
+        <button class="btn-editar" data-id="${i}">Dar Nota</button>
+      </span>
+    `;
+
+    correcaoContainer.appendChild(row);
+    setTimeout(() => row.classList.add("visible"), 50);
+  });
+}
+
+// chamar na inicialização
+renderRespostasAlunos();

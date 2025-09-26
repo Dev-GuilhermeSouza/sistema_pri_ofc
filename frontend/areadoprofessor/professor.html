@@ -31,6 +31,9 @@
         <li data-target="contents">
           <a href="#"><i class="uil uil-book-open"></i><span class="link-name">Conteúdos</span></a>
         </li>
+        <li data-target="correcao">
+          <a href="#"><i class="uil uil-check-circle"></i><span class="link-name">Correção</span></a>
+        </li>
       </ul>
 
       <ul class="logout-mode">
@@ -101,55 +104,55 @@
           <span class="col-actions">Ações</span>
         </div>
 
-        <div id="professorConteudoTabela">
-          <!-- Conteúdos serão renderizados pelo JS -->
+        <div id="professorConteudoTabela"></div>
+      </div>
+    </div>
+
+    <!-- Correção -->
+    <div class="correcao flex-section" id="correcao">
+      <div class="title"><i class="uil uil-check-circle"></i><span class="text">Correção</span></div>
+      <div id="correcaoContainer">
+        <div class="professor-table-row">Nenhuma atividade concluída pelos alunos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal do professor -->
+  <div id="modalPergunta" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modalTitle">Criar Conteúdo</h2>
+
+      <div class="input-group">
+        <label for="inputMateria">Matéria</label>
+        <select id="inputMateria">
+          <option value="Cosmovisão">Cosmovisão</option>
+          <option value="Ética e Cidadania">Ética e Cidadania</option>
+          <option value="CTS">CTS</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="inputData">Data de Criação</label>
+        <input type="date" id="inputData" readonly>
+      </div>
+
+      <div class="input-group">
+        <label>Introdução</label>
+        <textarea id="inputIntroducao" placeholder="Digite a introdução da matéria..."></textarea>
+      </div>
+
+      <div id="perguntasContainer">
+        <div class="input-group pergunta-item">
+          <label>Pergunta 1</label>
+          <input type="text" class="inputPergunta" placeholder="Digite a pergunta...">
         </div>
       </div>
+
+      <button type="button" id="btnAdicionarPergunta" class="btn">Adicionar Pergunta</button>
+      <button type="button" id="salvarPergunta" class="btn">Salvar Conteúdo</button>
     </div>
   </div>
-
-  <!-- Modal do professor -->
-  <!-- Modal do professor -->
-<div id="modalPergunta" class="modal" style="display:none;">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2 id="modalTitle">Criar Conteúdo</h2>
-
-    <!-- Campo de matéria -->
-<div class="input-group">
-  <label for="inputMateria">Matéria</label>
-  <select id="inputMateria">
-    <option value="Cosmovisão">Cosmovisão</option>
-    <option value="Ética e Cidadania">Ética e Cidadania</option>
-    <option value="CTS">CTS</option>
-  </select>
-</div>
-
-    <!-- Campo de data -->
-  <div class="input-group">
-  <label for="inputData">Data de Criação</label>
-  <input type="date" id="inputData" readonly>
-</div>
-
-    <!-- Introdução -->
-    <div class="input-group">
-      <label>Introdução</label>
-      <textarea id="inputIntroducao" placeholder="Digite a introdução da matéria..."></textarea>
-    </div>
-
-    <!-- Perguntas -->
-    <div id="perguntasContainer">
-      <div class="input-group pergunta-item">
-        <label>Pergunta 1</label>
-        <input type="text" class="inputPergunta" placeholder="Digite a pergunta...">
-      </div>
-    </div>
-
-    <button type="button" id="btnAdicionarPergunta" class="btn">Adicionar Pergunta</button>
-    <button type="button" id="salvarPergunta" class="btn">Salvar Conteúdo</button>
-  </div>
-</div>
-
 
   <script src="assets/js/professor.js"></script>
   <script src="assets/js/home.js"></script>

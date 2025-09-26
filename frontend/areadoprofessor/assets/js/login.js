@@ -17,7 +17,7 @@ loginForm.addEventListener("submit", function(e) {
   if (usuario) {
     // Armazena sessão do professor
     localStorage.setItem("professorLogado", JSON.stringify(usuario));
-    window.location.href = "professor.html"; // Redireciona para painel
+    window.location.href = "frontend/areadoprofessor/professor.html"; // Redireciona para painel
   } else {
     loginError.textContent = "Email ou senha incorretos";
   }
